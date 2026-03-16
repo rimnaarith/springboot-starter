@@ -20,6 +20,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/springboot_stater
     user: rimnaarith
     password: mypassword
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 
 # Spring Doc properties
 springdoc:
@@ -33,7 +37,8 @@ server:
 
 # Custom properties
 application:
-  file:
-    upload-dir: ./uploads
+  storage:
+    type: local
+    dir: ./uploads
   security:
     secret: 379fab244599ccbb5a42a6138bf28b147d60992f2b2fa99e3c05bbe090bd6535

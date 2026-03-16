@@ -12,20 +12,21 @@ import java.time.Instant;
 @Data
 public abstract class BaseEntity {
 
-    @Column(name = "create_at", updatable = false)
-    private Instant createAt;
+    @Column(name = "created_at", updatable = false)
+    private Instant createdAt;
 
-    @Column(name = "update_at")
-    private Instant updateAt;
+    @Column(name = "updated_at")
+    private Instant updatedAt;
 
     @PrePersist
     protected void onCreate() {
-        this.createAt = Instant.now();
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updateAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 
 }

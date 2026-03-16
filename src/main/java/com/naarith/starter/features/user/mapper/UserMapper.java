@@ -16,7 +16,6 @@ public class UserMapper {
                 .firstName(userDTO.firstName())
                 .lastName(userDTO.lastName())
                 .isCompetedProfile(userDTO.isCompetedProfile())
-                .profileImagePath(userDTO.profileImagePath())
                 .build();
     }
 
@@ -27,8 +26,8 @@ public class UserMapper {
                 .password(user.getPassword())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .profileImagePath(user.getProfileImage() != null ? user.getProfileImage().getPath() : null)
                 .isCompetedProfile(user.isCompetedProfile())
-                .profileImagePath(user.getProfileImagePath())
                 .build();
     }
 }

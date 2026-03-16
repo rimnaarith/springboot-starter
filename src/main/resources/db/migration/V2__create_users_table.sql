@@ -5,10 +5,10 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
+    profile_image_id VARCHAR(36),
     is_completed_profile BOOLEAN DEFAULT FALSE,
-    profile_image_path VARCHAR(255),
-    create_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    update_at TIMESTAMP NOT NULL DEFAULT NOW()
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 -- 2. Create GIN index for fast ILIKE '%text%' searches
 CREATE INDEX idx_users_first_name_trgm

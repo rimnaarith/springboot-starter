@@ -1,10 +1,9 @@
 package com.naarith.starter.features.user.entity;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.naarith.starter.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.naarith.starter.features.file.entity.File;
+import jakarta.persistence.*;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -19,6 +18,12 @@ public class User extends BaseEntity {
     @Id
     @Column(updatable = false)
     private String uid;
+    @PrePersist
+    public void generateId() {
+        if (uid == null) {
+            uid = NanoIdUtils.randomNanoId();
+        }
+    }
 
     private String email;
     @Column(name = "password_hash")
@@ -29,6 +34,8 @@ public class User extends BaseEntity {
     private String lastName;
     @Column(name = "is_completed_profile")
     private boolean isCompetedProfile;
-    @Column(name = "profile_image_path")
-    private String profileImagePath;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_image_id")
+    private File profileImage;
 }
