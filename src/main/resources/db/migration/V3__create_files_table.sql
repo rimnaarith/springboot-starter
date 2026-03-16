@@ -20,4 +20,5 @@ ON DELETE CASCADE;
 
 -- 3. Indexes
 CREATE INDEX idx_files_usage_type ON files(usage_type);
+CREATE INDEX idx_files_path ON files(path);
 CREATE INDEX idx_files_uploaded_by ON files(uploaded_by);

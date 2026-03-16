@@ -42,4 +42,9 @@ public class FileController {
         log.info("Received request to upload fileSize={}, type={}, user={}", file.getSize(), file.getContentType(),user.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body(service.upload(file, user));
     }
+
+    /// =========================
+    /// Serve file
+    /// =========================
+
 }

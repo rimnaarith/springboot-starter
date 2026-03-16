@@ -1,6 +1,7 @@
 package com.naarith.starter.features.file.service;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
+import com.naarith.starter.features.file.config.FileProperties;
 import com.naarith.starter.features.file.exception.StorageException;
 import com.naarith.starter.features.file.service.model.StoredFile;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +25,8 @@ public class LocalStorageService implements StorageService {
 
     private final Path root;
 
-    public LocalStorageService(
-            @Value("${application.storage.dir}") String uploadDir
-    ) {
-        this.root = Paths.get(uploadDir);
+    public LocalStorageService(FileProperties fileProperties) {
+        this.root = Paths.get(fileProperties.getUploadDir());
     }
 
     @Override

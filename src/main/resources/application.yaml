@@ -39,6 +39,6 @@ server:
 application:
   storage:
     type: local
-    dir: ./uploads
+    upload-dir: ./uploads
   security:
     secret: 379fab244599ccbb5a42a6138bf28b147d60992f2b2fa99e3c05bbe090bd6535
