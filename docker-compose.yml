@@ -1,0 +1,24 @@
+services:
+  postgres:
+    container_name: postgres_sql
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: rimnaarith
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: springboot_stater
+    volumes:
+      - springboot-stater:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - springboot-stater
+    restart: unless-stopped
+
+networks:
+  springboot-stater:
+    name: springboot-stater-network
+    driver: bridge
+
+volumes:
+  springboot-stater:
+    name: springboot-stater-volumes
