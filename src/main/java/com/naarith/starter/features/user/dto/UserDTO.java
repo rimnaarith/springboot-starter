@@ -10,5 +10,5 @@ public record UserDTO(
         String firstName,
         String lastName,
         boolean isCompetedProfile,
-        String profileImagePath
+        String profileImage
 ) {}

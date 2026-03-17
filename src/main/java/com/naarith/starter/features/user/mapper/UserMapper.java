@@ -2,6 +2,7 @@ package com.naarith.starter.features.user.mapper;
 
 import com.naarith.starter.features.user.dto.UserDTO;
 import com.naarith.starter.features.user.entity.User;
+import com.naarith.starter.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .profileImagePath(user.getProfileImage() != null ? user.getProfileImage().getPath() : null)
+                .profileImage(user.getProfileImage() != null ? Utils.makeUploadUrl(user.getProfileImage().getPath()) : null)
                 .isCompetedProfile(user.isCompetedProfile())
                 .build();
     }
