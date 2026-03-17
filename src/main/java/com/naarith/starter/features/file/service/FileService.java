@@ -6,6 +6,7 @@ import com.naarith.starter.features.file.dto.FileUploadResDTO;
 import com.naarith.starter.features.file.entity.File;
 import com.naarith.starter.features.file.enums.UsageType;
 import com.naarith.starter.features.file.exception.StorageException;
+import com.naarith.starter.features.file.mapper.FileMapper;
 import com.naarith.starter.features.file.repository.FileRepository;
 import com.naarith.starter.features.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class FileService {
     private final FileRepository repository;
     private final FileValidator fileValidator;
     private final StorageService storageService;
+    private final FileMapper mapper;
 
     /**
      * Handle file upload
@@ -47,9 +49,7 @@ public class FileService {
                 .build();
         repository.save(entity);
         log.info("File {} has been uploaded", stored.path());
-        return FileUploadResDTO.builder()
-                .fileId(entity.getId())
-                .build();
+        return mapper.toFileUploadResDTO(entity);
     }
 
     /**
