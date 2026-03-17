@@ -1,6 +1,7 @@
 package com.naarith.starter.features.user.mapper;
 
 import com.naarith.starter.features.user.dto.UserDTO;
+import com.naarith.starter.features.user.dto.UserDetailsResDTO;
 import com.naarith.starter.features.user.entity.User;
 import com.naarith.starter.utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,16 @@ public class UserMapper {
                 .uid(user.getUid())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .isCompetedProfile(user.isCompetedProfile())
+                .build();
+    }
+
+    public UserDetailsResDTO toUserDetailsDTO(User user) {
+        return UserDetailsResDTO.builder()
+                .uid(user.getUid())
+                .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .profileImage(user.getProfileImage() != null ? Utils.makeUploadUrl(user.getProfileImage().getPath()) : null)

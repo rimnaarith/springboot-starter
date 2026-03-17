@@ -6,6 +6,7 @@ import com.naarith.starter.features.file.entity.File;
 import com.naarith.starter.features.file.enums.UsageType;
 import com.naarith.starter.features.file.service.FileService;
 import com.naarith.starter.features.user.dto.UserDTO;
+import com.naarith.starter.features.user.dto.UserDetailsResDTO;
 import com.naarith.starter.features.user.dto.UserUpdateReqDTO;
 import com.naarith.starter.features.user.exception.EmailAlreadyExistsException;
 import com.naarith.starter.features.user.exception.InvalidProfileImageException;
@@ -93,5 +94,16 @@ public class UserService {
         /// Save update
         repository.save(user);
         log.info("User with email={} updated successfully", user.getEmail());
+    }
+
+    /**
+     * Get user details by email
+     * @param email user email
+     * @return UserDetailsResDTO
+     * @throws UserNotFoundException in case the user not found
+     */
+    public UserDetailsResDTO getUserDetailsByEmail(String email) throws UserNotFoundException {
+        var user = repository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+        return mapper.toUserDetailsDTO(user);
     }
 }

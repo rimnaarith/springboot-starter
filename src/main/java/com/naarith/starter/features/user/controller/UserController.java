@@ -1,6 +1,8 @@
 package com.naarith.starter.features.user.controller;
 
 import com.naarith.starter.features.auth.security.UserPrincipal;
+import com.naarith.starter.features.user.dto.UserDTO;
+import com.naarith.starter.features.user.dto.UserDetailsResDTO;
 import com.naarith.starter.features.user.dto.UserUpdateReqDTO;
 import com.naarith.starter.features.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -41,6 +40,20 @@ public class UserController {
         log.info("Update user information attempt for emai={}", userPrincipal.getUsername());
         service.update(reqDTO, userPrincipal);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /// =========================
+    /// Get user details by email
+    /// =========================
+    @Operation(summary = "Get user by email")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    @GetMapping("{email}")
+    public ResponseEntity<UserDetailsResDTO> getUser(@PathVariable String email) {
+        log.info("Get user information attempt for email={}", email);
+        return ResponseEntity.ok(service.getUserDetailsByEmail(email));
     }
 
 }
