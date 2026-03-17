@@ -113,7 +113,6 @@ public class UserService {
      * @return UserListResDTO
      */
     public UserListResDTO getUserList(UserListReqDTO reqDTO) {
-
         /// Create page request
         var pageable = PageRequest.of(
                 reqDTO.page() - 1, /// start form 0
@@ -121,6 +120,7 @@ public class UserService {
                 Sort.by(Sort.Direction.DESC, "createdAt")
         );
 
+        /// Get users who have completed profile setup
         var page = repository.findByIsCompletedProfileTrue(pageable);
         var userList = page.getContent().stream().map(mapper::toUserDetailsDTO).toList();
 

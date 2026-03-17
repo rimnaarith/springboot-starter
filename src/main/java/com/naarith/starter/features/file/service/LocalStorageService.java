@@ -52,7 +52,7 @@ public class LocalStorageService implements StorageService {
             log.info("File tmp/{} has been stored", fileName);
 
             return StoredFile.builder()
-                    .path("/tmp/" + fileName)
+                    .path("tmp/" + fileName)
                     .size(file.getSize())
                     .contentType(file.getContentType())
                     .extension(extension)
