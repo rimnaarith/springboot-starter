@@ -33,7 +33,7 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "is_completed_profile")
-    private boolean isCompetedProfile;
+    private boolean isCompletedProfile;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_image_id")

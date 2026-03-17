@@ -5,9 +5,7 @@ import com.naarith.starter.features.auth.security.UserPrincipal;
 import com.naarith.starter.features.file.entity.File;
 import com.naarith.starter.features.file.enums.UsageType;
 import com.naarith.starter.features.file.service.FileService;
-import com.naarith.starter.features.user.dto.UserDTO;
-import com.naarith.starter.features.user.dto.UserDetailsResDTO;
-import com.naarith.starter.features.user.dto.UserUpdateReqDTO;
+import com.naarith.starter.features.user.dto.*;
 import com.naarith.starter.features.user.exception.EmailAlreadyExistsException;
 import com.naarith.starter.features.user.exception.InvalidProfileImageException;
 import com.naarith.starter.features.user.exception.UserNotFoundException;
@@ -15,6 +13,8 @@ import com.naarith.starter.features.user.mapper.UserMapper;
 import com.naarith.starter.features.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -89,7 +89,7 @@ public class UserService {
         }
 
         /// Update setup status
-        user.setCompetedProfile(true);
+        user.setCompletedProfile(true);
 
         /// Save update
         repository.save(user);
@@ -105,5 +105,31 @@ public class UserService {
     public UserDetailsResDTO getUserDetailsByEmail(String email) throws UserNotFoundException {
         var user = repository.findByEmail(email).orElseThrow(UserNotFoundException::new);
         return mapper.toUserDetailsDTO(user);
+    }
+
+    /**
+     * Get a list of users (only for users who have completed profile setup)
+     * @param reqDTO Request object
+     * @return UserListResDTO
+     */
+    public UserListResDTO getUserList(UserListReqDTO reqDTO) {
+
+        /// Create page request
+        var pageable = PageRequest.of(
+                reqDTO.page() - 1, /// start form 0
+                reqDTO.size(),
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+
+        var page = repository.findByIsCompletedProfileTrue(pageable);
+        var userList = page.getContent().stream().map(mapper::toUserDetailsDTO).toList();
+
+        return UserListResDTO.builder()
+                .page(reqDTO.page())
+                .size(reqDTO.size())
+                .totalPage(page.getTotalPages())
+                .totalUser(page.getTotalElements())
+                .userList(userList)
+                .build();
     }
 }

@@ -1,9 +1,7 @@
 package com.naarith.starter.features.user.controller;
 
 import com.naarith.starter.features.auth.security.UserPrincipal;
-import com.naarith.starter.features.user.dto.UserDTO;
-import com.naarith.starter.features.user.dto.UserDetailsResDTO;
-import com.naarith.starter.features.user.dto.UserUpdateReqDTO;
+import com.naarith.starter.features.user.dto.*;
 import com.naarith.starter.features.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -56,4 +54,17 @@ public class UserController {
         return ResponseEntity.ok(service.getUserDetailsByEmail(email));
     }
 
+    /// =========================
+    /// Get user list
+    /// =========================
+    @Operation(summary = "Get a list of users", description = "Get a list of users (only for users who have completed profile setup)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", description = "Invalid request payload or validation error.")
+    })
+    @GetMapping
+    public ResponseEntity<UserListResDTO> getUserList(@Valid @ModelAttribute UserListReqDTO reqDTO) {
+        log.info("Get user list request received data={}", reqDTO);
+        return ResponseEntity.ok(service.getUserList(reqDTO));
+    }
 }
