@@ -8,6 +8,7 @@ public record StoredFile(
         long size,
         String contentType,
         String extension,
-        String originalName
+        String originalName,
+        String uniqueName
 ) {
 }

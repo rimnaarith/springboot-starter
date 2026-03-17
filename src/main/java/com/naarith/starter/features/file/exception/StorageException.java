@@ -10,4 +10,7 @@ public class StorageException extends BaseException {
     public StorageException(String message, HttpStatus status) {
         super(message, status);
     }
+    public StorageException(String message, Throwable cause) {
+        super(message, HttpStatus.INTERNAL_SERVER_ERROR, cause);
+    }
 }

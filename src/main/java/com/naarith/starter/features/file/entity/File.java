@@ -24,6 +24,8 @@ public class File extends BaseEntity {
         }
     }
     private String name;
+    @Column(name = "original_name")
+    private String originalName;
     private String path;
     @Column(name = "mime_type")
     private String mimeType;

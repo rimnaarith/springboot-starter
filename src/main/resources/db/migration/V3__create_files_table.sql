@@ -2,6 +2,7 @@
 CREATE TABLE files (
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) NOT NULL,
     path VARCHAR(1024) NOT NULL,
     mime_type VARCHAR(100) NOT NULL,
     size BIGINT NOT NULL,
