@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FileRepository extends JpaRepository<File, String> {
@@ -18,4 +19,7 @@ public interface FileRepository extends JpaRepository<File, String> {
         AND f.createdAt < :cutoff
     """)
     List<File> findUnusedOlderThan(@Param("cutoff") Instant cutoff);
+
+    @Query("SELECT f.path FROM File f WHERE f.id = :id")
+    Optional<String> findPathById(String id);
 }

@@ -78,6 +78,7 @@ public class UserService {
 
             /// Delete old image if exists
             if (user.getProfileImage() != null) {
+                log.info("Delete user old profile image");
                 fileService.deleteFile(user.getProfileImage().getId());
             }
 

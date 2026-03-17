@@ -78,8 +78,10 @@ public class FileService {
      * @param fileId The id of file to be deleted
      */
     public void deleteFile(String fileId) {
-        storageService.delete(fileId);
-        repository.deleteById(fileId);
-        log.info("File with id {} deleted successfully", fileId);
+        repository.findPathById(fileId).ifPresentOrElse(path -> {
+            storageService.delete(path);
+            repository.deleteById(fileId);
+            log.info("File with id {} deleted successfully", fileId);
+        }, () -> log.warn("File with id {} not found", fileId));
     }
 }

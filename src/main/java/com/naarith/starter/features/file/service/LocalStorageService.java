@@ -78,7 +78,9 @@ public class LocalStorageService implements StorageService {
     public void delete(String path) {
         try {
             Files.deleteIfExists(root.resolve(path));
-        } catch (IOException ignored) {}
+        } catch (IOException e) {
+            log.error("Failed to delete file. message={}", e.getMessage(), e);
+        }
     }
 
     @Override
