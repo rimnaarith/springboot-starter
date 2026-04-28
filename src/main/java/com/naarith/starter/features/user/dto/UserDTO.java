@@ -9,5 +9,5 @@ public record UserDTO(
         String password,
         String firstName,
         String lastName,
-        boolean isCompetedProfile
+        boolean isCompletedProfile
 ) {}

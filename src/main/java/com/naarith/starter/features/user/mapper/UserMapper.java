@@ -17,7 +17,7 @@ public class UserMapper {
                 .password(userDTO.password())
                 .firstName(userDTO.firstName())
                 .lastName(userDTO.lastName())
-                .isCompletedProfile(userDTO.isCompetedProfile())
+                .isCompletedProfile(userDTO.isCompletedProfile())
                 .build();
     }
 
@@ -28,7 +28,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .isCompetedProfile(user.isCompletedProfile())
+                .isCompletedProfile(user.isCompletedProfile())
                 .build();
     }
 
@@ -39,7 +39,7 @@ public class UserMapper {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .profileImage(user.getProfileImage() != null ? Utils.makeUploadUrl(user.getProfileImage().getPath()) : null)
-                .isCompetedProfile(user.isCompletedProfile())
+                .isCompletedProfile(user.isCompletedProfile())
                 .build();
     }
 }

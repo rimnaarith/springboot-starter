@@ -8,6 +8,6 @@ public record UserDetailsResDTO(
         String email,
         String firstName,
         String lastName,
-        boolean isCompetedProfile,
+        boolean isCompletedProfile,
         String profileImage
 ) {}
